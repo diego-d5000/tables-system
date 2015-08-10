@@ -3,7 +3,7 @@ package edu.diegod.datastructures;
 /**
  * Created by diego-d on 8/5/15.
  */
-public class CircularQueue implements mQueue {
+public class CircularQueue implements MQueue {
     private static final int MAXSIZE = 39;
     protected int first;
     protected int last;

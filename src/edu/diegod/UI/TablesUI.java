@@ -1,5 +1,7 @@
 package edu.diegod.UI;
 
+import edu.diegod.datastructures.MQueue;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,11 +15,14 @@ public class TablesUI {
     private JFrame mainFrame;
     private JPanel headerPanel;
     private JPanel tablesIndicatorPanel;
+    private JLabel nextTableLabel;
     private JPanel buttonsPanel;
+    private MQueue tablesQueue;
     private ActionListener onClickInventoryButton;
 
-    public TablesUI(JFrame mainFrame, ActionListener nextUI) {
+    public TablesUI(JFrame mainFrame, MQueue tablesQueue, ActionListener nextUI) {
         this.mainFrame = mainFrame;
+        this.tablesQueue = tablesQueue;
         this.onClickInventoryButton = nextUI;
         setUpHeaderPanel();
         setUpTablesIndicatorPanel();
@@ -39,7 +44,9 @@ public class TablesUI {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.print("test");
+                tablesQueue.enqueue(nextTableLabel.getText());
+                String nextTable = (String) tablesQueue.dequeue();
+                nextTableLabel.setText(nextTable);
             }
         });
         buttonsPanel.add(nextButton);
@@ -55,9 +62,10 @@ public class TablesUI {
     }
 
     private void setUpTablesIndicatorPanel() {
+        String nextTable = (String) tablesQueue.dequeue();
         tablesIndicatorPanel = new JPanel(new FlowLayout());
         JLabel jLabel = new JLabel("Siguiente mesa Disponible: ");
-        JLabel nextTableLabel = new JLabel("");
+        nextTableLabel = new JLabel(nextTable);
         tablesIndicatorPanel.add(jLabel);
         tablesIndicatorPanel.add(nextTableLabel);
     }

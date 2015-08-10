@@ -1,10 +1,12 @@
 package edu.diegod.UI;
 
+import edu.diegod.datastructures.ArrayStack;
+import edu.diegod.datastructures.MLinkedList;
+import edu.diegod.datastructures.MList;
+import edu.diegod.datastructures.Stack;
 import edu.diegod.models.Product;
 
 import javax.swing.table.AbstractTableModel;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by diego-d on 8/2/15.
@@ -12,13 +14,13 @@ import java.util.List;
 public class InventoryTableModel extends AbstractTableModel {
 
     public static String[] columnNames = {"Artítculo", "Clave", "Unidades", "Costo", "Precio"};
-    private List productsData;
+    private MList productsData;
 
     public InventoryTableModel() {
-        productsData = new LinkedList<Product>();
+        productsData = new MLinkedList();
     }
 
-    public InventoryTableModel(List productsData) {
+    public InventoryTableModel(MList productsData) {
         this.productsData = productsData;
     }
 
@@ -40,6 +42,13 @@ public class InventoryTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Product product = (Product) productsData.get(rowIndex);
-        return product.getTableValueAtIndex(columnIndex);
+        if (product != null)
+            return product.getTableValueAtIndex(columnIndex);
+        else return null;
+    }
+
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return false;
     }
 }

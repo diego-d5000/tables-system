@@ -1,15 +1,13 @@
 package edu.diegod.datastructures;
 
-import java.util.List;
-
 /**
  * Created by diego-d on 8/7/15.
  */
-public class mLinkedList implements mList {
+public class MLinkedList implements MList {
     private Node head;
     private int listCount;
 
-    public mLinkedList() {
+    public MLinkedList() {
         head = null;
         listCount = 0;
     }
@@ -54,7 +52,7 @@ public class mLinkedList implements mList {
         Node result;
         for (result = head; result != null; result = result.linkedTo)
             if (result.index == index)
-                return result;
+                return result.data;
         return null;
     }
 

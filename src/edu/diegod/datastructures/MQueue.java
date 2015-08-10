@@ -3,7 +3,7 @@ package edu.diegod.datastructures;
 /**
  * Created by diego-d on 8/6/15.
  */
-public interface mQueue {
+public interface MQueue {
 
     boolean isFull();
 
